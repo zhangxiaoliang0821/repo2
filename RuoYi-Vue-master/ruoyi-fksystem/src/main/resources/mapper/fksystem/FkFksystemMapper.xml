@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.fksystem.mapper.FkFksystemMapper">
+    
+    <resultMap type="FkFksystem" id="FkFksystemResult">
+        <result property="fksystemId"    column="fksystem_id"    />
+        <result property="fksystemName"    column="fksystem_name"    />
+        <result property="fksystemAge"    column="fksystem_age"    />
+        <result property="fksystemAddress"    column="fksystem_address"    />
+        <result property="fksystemSex"    column="fksystem_sex"    />
+        <result property="fksystemStatus"    column="fksystem_status"    />
+        <result property="fksystemBirthday"    column="fksystem_birthday"    />
+    </resultMap>
+
+    <sql id="selectFkFksystemVo">
+        select fksystem_id, fksystem_name, fksystem_age, fksystem_address, fksystem_sex, fksystem_status, fksystem_birthday from fk_fksystem
+    </sql>
+
+    <select id="selectFkFksystemList" parameterType="FkFksystem" resultMap="FkFksystemResult">
+        <include refid="selectFkFksystemVo"/>
+        <where>  
+            <if test="fksystemName != null  and fksystemName != ''"> and fksystem_name like concat('%', #{fksystemName}, '%')</if>
+            <if test="fksystemAge != null "> and fksystem_age = #{fksystemAge}</if>
+            <if test="fksystemAddress != null  and fksystemAddress != ''"> and fksystem_address = #{fksystemAddress}</if>
+            <if test="fksystemSex != null  and fksystemSex != ''"> and fksystem_sex = #{fksystemSex}</if>
+            <if test="fksystemStatus != null  and fksystemStatus != ''"> and fksystem_status = #{fksystemStatus}</if>
+            <if test="fksystemBirthday != null "> and fksystem_birthday = #{fksystemBirthday}</if>
+        </where>
+    </select>
+    
+    <select id="selectFkFksystemByFksystemId" parameterType="Long" resultMap="FkFksystemResult">
+        <include refid="selectFkFksystemVo"/>
+        where fksystem_id = #{fksystemId}
+    </select>
+        
+    <insert id="insertFkFksystem" parameterType="FkFksystem" useGeneratedKeys="true" keyProperty="fksystemId">
+        insert into fk_fksystem
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="fksystemName != null">fksystem_name,</if>
+            <if test="fksystemAge != null">fksystem_age,</if>
+            <if test="fksystemAddress != null">fksystem_address,</if>
+            <if test="fksystemSex != null">fksystem_sex,</if>
+            <if test="fksystemStatus != null">fksystem_status,</if>
+            <if test="fksystemBirthday != null">fksystem_birthday,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="fksystemName != null">#{fksystemName},</if>
+            <if test="fksystemAge != null">#{fksystemAge},</if>
+            <if test="fksystemAddress != null">#{fksystemAddress},</if>
+            <if test="fksystemSex != null">#{fksystemSex},</if>
+            <if test="fksystemStatus != null">#{fksystemStatus},</if>
+            <if test="fksystemBirthday != null">#{fksystemBirthday},</if>
+         </trim>
+    </insert>
+
+    <update id="updateFkFksystem" parameterType="FkFksystem">
+        update fk_fksystem
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="fksystemName != null">fksystem_name = #{fksystemName},</if>
+            <if test="fksystemAge != null">fksystem_age = #{fksystemAge},</if>
+            <if test="fksystemAddress != null">fksystem_address = #{fksystemAddress},</if>
+            <if test="fksystemSex != null">fksystem_sex = #{fksystemSex},</if>
+            <if test="fksystemStatus != null">fksystem_status = #{fksystemStatus},</if>
+            <if test="fksystemBirthday != null">fksystem_birthday = #{fksystemBirthday},</if>
+        </trim>
+        where fksystem_id = #{fksystemId}
+    </update>
+
+    <delete id="deleteFkFksystemByFksystemId" parameterType="Long">
+        delete from fk_fksystem where fksystem_id = #{fksystemId}
+    </delete>
+
+    <delete id="deleteFkFksystemByFksystemIds" parameterType="String">
+        delete from fk_fksystem where fksystem_id in 
+        <foreach item="fksystemId" collection="array" open="(" separator="," close=")">
+            #{fksystemId}
+        </foreach>
+    </delete>
+</mapper>
