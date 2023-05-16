@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.rygk.mapper.ScjzFxGkryMapper">
+    
+    <resultMap type="ScjzFxGkry" id="ScjzFxGkryResult">
+        <result property="ID"    column="ID"    />
+        <result property="FXDWID"    column="FXDWID"    />
+        <result property="DWBM"    column="DWBM"    />
+        <result property="DWMC"    column="DWMC"    />
+        <result property="DWQBM"    column="DWQBM"    />
+        <result property="DWQMC"    column="DWQMC"    />
+        <result property="GKGW"    column="GKGW"    />
+        <result property="GKRYBM"    column="GKRYBM"    />
+        <result property="GKRYXM"    column="GKRYXM"    />
+        <result property="CZRDWBM"    column="CZRDWBM"    />
+        <result property="CZRDWMC"    column="CZRDWMC"    />
+        <result property="CZRBM"    column="CZRBM"    />
+        <result property="CZRXM"    column="CZRXM"    />
+        <result property="CZSJ"    column="CZSJ"    />
+        <result property="GKCS"    column="GKCS"    />
+        <result property="FXDWBM"    column="FXDWBM"    />
+    </resultMap>
+
+    <sql id="selectScjzFxGkryVo">
+        select ID, FXDWID, DWBM, DWMC, DWQBM, DWQMC, GKGW, GKRYBM, GKRYXM, CZRDWBM, CZRDWMC, CZRBM, CZRXM, CZSJ, GKCS, FXDWBM from scjz_fx_gkry
+    </sql>
+
+    <select id="selectScjzFxGkryList" parameterType="ScjzFxGkry" resultMap="ScjzFxGkryResult">
+        <include refid="selectScjzFxGkryVo"/>
+        <where>  
+            <if test="FXDWID != null  and FXDWID != ''"> and FXDWID = #{FXDWID}</if>
+            <if test="DWBM != null  and DWBM != ''"> and DWBM = #{DWBM}</if>
+            <if test="DWMC != null  and DWMC != ''"> and DWMC = #{DWMC}</if>
+            <if test="DWQBM != null  and DWQBM != ''"> and DWQBM = #{DWQBM}</if>
+            <if test="DWQMC != null  and DWQMC != ''"> and DWQMC = #{DWQMC}</if>
+            <if test="GKGW != null  and GKGW != ''"> and GKGW = #{GKGW}</if>
+            <if test="GKRYBM != null  and GKRYBM != ''"> and GKRYBM = #{GKRYBM}</if>
+            <if test="GKRYXM != null  and GKRYXM != ''"> and GKRYXM = #{GKRYXM}</if>
+            <if test="CZRDWBM != null  and CZRDWBM != ''"> and CZRDWBM = #{CZRDWBM}</if>
+            <if test="CZRDWMC != null  and CZRDWMC != ''"> and CZRDWMC = #{CZRDWMC}</if>
+            <if test="CZRBM != null  and CZRBM != ''"> and CZRBM = #{CZRBM}</if>
+            <if test="CZRXM != null  and CZRXM != ''"> and CZRXM = #{CZRXM}</if>
+            <if test="CZSJ != null "> and CZSJ = #{CZSJ}</if>
+            <if test="GKCS != null  and GKCS != ''"> and GKCS = #{GKCS}</if>
+            <if test="FXDWBM != null  and FXDWBM != ''"> and FXDWBM = #{FXDWBM}</if>
+        </where>
+    </select>
+    
+    <select id="selectScjzFxGkryByID" parameterType="String" resultMap="ScjzFxGkryResult">
+        <include refid="selectScjzFxGkryVo"/>
+        where ID = #{ID}
+    </select>
+        
+    <insert id="insertScjzFxGkry" parameterType="ScjzFxGkry">
+        insert into scjz_fx_gkry
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ID != null">ID,</if>
+            <if test="FXDWID != null and FXDWID != ''">FXDWID,</if>
+            <if test="DWBM != null">DWBM,</if>
+            <if test="DWMC != null">DWMC,</if>
+            <if test="DWQBM != null">DWQBM,</if>
+            <if test="DWQMC != null">DWQMC,</if>
+            <if test="GKGW != null">GKGW,</if>
+            <if test="GKRYBM != null">GKRYBM,</if>
+            <if test="GKRYXM != null">GKRYXM,</if>
+            <if test="CZRDWBM != null">CZRDWBM,</if>
+            <if test="CZRDWMC != null">CZRDWMC,</if>
+            <if test="CZRBM != null">CZRBM,</if>
+            <if test="CZRXM != null">CZRXM,</if>
+            <if test="CZSJ != null">CZSJ,</if>
+            <if test="GKCS != null">GKCS,</if>
+            <if test="FXDWBM != null">FXDWBM,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ID != null">#{ID},</if>
+            <if test="FXDWID != null and FXDWID != ''">#{FXDWID},</if>
+            <if test="DWBM != null">#{DWBM},</if>
+            <if test="DWMC != null">#{DWMC},</if>
+            <if test="DWQBM != null">#{DWQBM},</if>
+            <if test="DWQMC != null">#{DWQMC},</if>
+            <if test="GKGW != null">#{GKGW},</if>
+            <if test="GKRYBM != null">#{GKRYBM},</if>
+            <if test="GKRYXM != null">#{GKRYXM},</if>
+            <if test="CZRDWBM != null">#{CZRDWBM},</if>
+            <if test="CZRDWMC != null">#{CZRDWMC},</if>
+            <if test="CZRBM != null">#{CZRBM},</if>
+            <if test="CZRXM != null">#{CZRXM},</if>
+            <if test="CZSJ != null">#{CZSJ},</if>
+            <if test="GKCS != null">#{GKCS},</if>
+            <if test="FXDWBM != null">#{FXDWBM},</if>
+         </trim>
+    </insert>
+
+    <update id="updateScjzFxGkry" parameterType="ScjzFxGkry">
+        update scjz_fx_gkry
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="FXDWID != null and FXDWID != ''">FXDWID = #{FXDWID},</if>
+            <if test="DWBM != null">DWBM = #{DWBM},</if>
+            <if test="DWMC != null">DWMC = #{DWMC},</if>
+            <if test="DWQBM != null">DWQBM = #{DWQBM},</if>
+            <if test="DWQMC != null">DWQMC = #{DWQMC},</if>
+            <if test="GKGW != null">GKGW = #{GKGW},</if>
+            <if test="GKRYBM != null">GKRYBM = #{GKRYBM},</if>
+            <if test="GKRYXM != null">GKRYXM = #{GKRYXM},</if>
+            <if test="CZRDWBM != null">CZRDWBM = #{CZRDWBM},</if>
+            <if test="CZRDWMC != null">CZRDWMC = #{CZRDWMC},</if>
+            <if test="CZRBM != null">CZRBM = #{CZRBM},</if>
+            <if test="CZRXM != null">CZRXM = #{CZRXM},</if>
+            <if test="CZSJ != null">CZSJ = #{CZSJ},</if>
+            <if test="GKCS != null">GKCS = #{GKCS},</if>
+            <if test="FXDWBM != null">FXDWBM = #{FXDWBM},</if>
+        </trim>
+        where ID = #{ID}
+    </update>
+
+    <delete id="deleteScjzFxGkryByID" parameterType="String">
+        delete from scjz_fx_gkry where ID = #{ID}
+    </delete>
+
+    <delete id="deleteScjzFxGkryByIDs" parameterType="String">
+        delete from scjz_fx_gkry where ID in 
+        <foreach item="ID" collection="array" open="(" separator="," close=")">
+            #{ID}
+        </foreach>
+    </delete>
+</mapper>
